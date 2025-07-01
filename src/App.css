@@ -1,3 +1,4 @@
+
 .homePageWarpper {
   height: 100vh;
   display: flex;
@@ -18,11 +19,11 @@
 footer {
   position: fixed;
   bottom: 0;
-  ;
-}
-
-footer a {
-  color: #4aee88;
+  a {
+    color: #4aee88;
+    text-decoration: none;
+    border-bottom: 1px solid #4aee88;
+  }
 }
 
 .inputGroup {
@@ -61,9 +62,10 @@ footer a {
 }
 
 .joinBtn {
-  background: #4aee88;
+  background: #20cc62;
   width: 100px;
   margin-left: auto;
+  font-weight: bold;
 }
 
 .joinBtn:hover {
@@ -84,5 +86,4 @@ footer a {
 
 .createNewBtn:hover , footer a:hover {
   color: #2b824c;
-  border-bottom: 1px solid #2b824c;
 }
