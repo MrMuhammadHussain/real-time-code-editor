@@ -26,10 +26,10 @@ const EditorPage = () => {
           </div>
         </div>
         <button className='btn copyBtn' onClick={() =>
-          toast.success("Room Copied!✔️")
+          toast.success("Room ID Copied!👍")
       } >Copy Room ID</button>
         <button className='btn leaveBtn' onClick={() =>
-          toast.success("Room Left ✔️")
+          toast.success("Room Left ☺️")
       }>LEAVE Room</button>
 
       </div>

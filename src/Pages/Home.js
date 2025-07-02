@@ -46,7 +46,7 @@ const Home = () => {
             onKeyUp={handleEnterKey}
             placeholder='Room ID Here' />
 
-          <input type='text' className='inputBox'
+          <input type='text' className='inputBox' maxLength={10}
             onChange={(e) => setUserName(e.target.value)}
             value={userName}
             onKeyUp={handleEnterKey}
