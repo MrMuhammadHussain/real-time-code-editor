@@ -1,71 +1,55 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, } from 'react'
+import { useLocation, useNavigate, Navigate, useParams } from 'react-router-dom';
+import { initSoket } from '../socket';
 import Client from '../components/Client'
 import Editor from '../components/Editor'
 import toast from 'react-hot-toast';
-import { initSoket } from '../socket';
-import { useLocation } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import Actions from '../Actions';
 
 const EditorPage = () => {
-  const navigate = useNavigate()
+  const reactorNavigat = useNavigate()
   const Location = useLocation()
-
   const socketRef = useRef(null)
+  const { roomId } = useParams()
+
+
+  const handaleError = (e) => {
+    console.log("❌ Socket connection error:", e);
+    toast.error("Socket connection error! Please try again later.")
+    reactorNavigat('/')
+  }
+  const [clients, setClients] = useState([])
+
+
+
+
   useEffect(() => {
     const init = async () => {
       socketRef.current = await initSoket()
-      // socketRef.current.emit(Actions.JOIN,{
-      //   roomId,
-      //   username: Location.state?.username,
-      // })
+      socketRef.current.on("connect_error", (err) => handaleError(err))
+      socketRef.current.on("connect_failed", (err) => handaleError(err))
+      socketRef.current.emit(Actions.JOIN, {
+        roomId,
+        username: Location.state?.username,
+      })
+      socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
+        if (username  !== Location.state?.username){
+          if(socketId !== socketRef.current.id) {
+            toast.success(`${username} has joined`)
+          }
+        }
+        setClients(clients)
+
+
+
+      })
     }
     init()
   }, [])
 
-
-// This Code From CHATGPT, but my code is working fine
-//   useEffect(() => {
-//   const init = async () => {
-//     socketRef.current = initSoket(); // no await needed
-//     socketRef.current.emit(Actions.JOIN, {
-//       roomId: Location.state?.roomId, // Make sure this is defined!
-//       username: Location.state?.username,
-//     });
-
-//     socketRef.current.on("connect", () => {
-//       console.log("✅ Connected:", socketRef.current.id);
-//     });
-
-//     socketRef.current.on("disconnect", () => {
-//       console.log("❌ Disconnected:", socketRef.current.id);
-//     });
-//   };
-
-//   init();
-
-//   return () => {
-//     if (socketRef.current) {
-//       socketRef.current.disconnect();
-//       socketRef.current = null;
-//       console.log("👋 Socket disconnected on unmount");
-//     }
-//   };
-// }, []);
-
-  const [clients, setClients] = useState([
-    { socketId: 1, username: 'M Hussain' },
-    // { socketId: 2, username: 'Obaid M' },
-    // { socketId: 3, username: 'Ammar S' },
-  ])
-  const leaveRoom = () => {
-    navigate('/', {
-      state: {
-        success: true,
-      }
-    })
-
-    toast.success("Left Room Successfully!👋")
+  if (!Location.state) {
+    toast.error("Room ID Not Found! Please create a new room.")
+    return <Navigate to="/" />
   }
 
   return (
@@ -85,20 +69,12 @@ const EditorPage = () => {
         <button className='btn copyBtn' onClick={() =>
           toast.success("Room ID Copied!👍")
         } >Copy Room ID</button>
-        <button className='btn leaveBtn' onClick={leaveRoom}>LEAVE Room</button>
-
+        <button className='btn leaveBtn'>LEAVE Room</button>
       </div>
       <div className='codeEditor'>
         <Editor />
       </div>
-
-
-
     </div>
-
-
-
-
 
   )
 }

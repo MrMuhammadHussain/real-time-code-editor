@@ -19,21 +19,21 @@ const Editor = () => {
       lineNumbers: true,
       autoCloseBrackets: true,
       autoCloseTags: true,
-      
+
       extraKeys: {
-      "Ctrl-Space": function(cm) {
-        cm.showHint({
-          hint: () => {
-            return {
-              from: cm.getCursor(),
-              to: cm.getCursor(),
-              list: ['function', 'const', 'let', 'console.log', 'return', 'if', 'else'],
-            };
-          },
-        });
+        "Ctrl-Space": function (cm) {
+          cm.showHint({
+            hint: () => {
+              return {
+                from: cm.getCursor(),
+                to: cm.getCursor(),
+                list: ['function', 'const', 'let', 'console.log', 'return', 'if', 'else'],
+              };
+            },
+          });
+        }
       }
-    }
-      
+
     });
 
     return () => {
@@ -42,9 +42,7 @@ const Editor = () => {
   }, []);
 
   return (
-    <textarea
-      ref={editorRef}
-    ></textarea>
+    <textarea ref={editorRef}> </textarea>
   )
 }
 
