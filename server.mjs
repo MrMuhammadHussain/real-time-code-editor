@@ -23,7 +23,7 @@ const getAllClints = (roomId) => {
 }
 
 io.on("connection", (socket) => {
-  console.log("✅ client connected", socket.id);
+  // console.log("✅ client connected", socket.id);
 
   socket.on(Actions.JOIN, ({ roomId, username }) => {
     usersList[socket.id] = username;
@@ -38,6 +38,23 @@ io.on("connection", (socket) => {
 
       })
     })
+  })
+  socket.on(Actions.CODE_CHANGE, ({ roomId, code }) => {
+    socket.in(roomId).emit(Actions.CODE_CHANGE, {
+      code
+    })
+  })
+
+  socket.on("disconnecting", () => {
+    const rooms = [...socket.rooms];
+    rooms.forEach((roomId) => {
+      socket.in(roomId).emit(Actions.DISCONNECTED, {
+        socketId: socket.id,
+        username: usersList[socket.id],
+      })
+    })
+    delete usersList[socket.id]
+    socket.leave()
   })
 
 })
