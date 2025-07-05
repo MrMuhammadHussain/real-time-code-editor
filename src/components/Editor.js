@@ -7,13 +7,14 @@ import "codemirror/addon/edit/closebrackets"
 import "codemirror/addon/edit/closetag"
 import "codemirror/addon/hint/show-hint";
 import "codemirror/addon/hint/show-hint.css";
+import Actions from '../Actions'
 
 
-const Editor = () => {
-  const editorRef = useRef();
+const Editor = ({ socketRef, roomId }) => {
+  const editorRef = useRef(null);
 
   useEffect(() => {
-    const editor = Codemirror.fromTextArea(editorRef.current, {
+    editorRef.current = Codemirror.fromTextArea(editorRef.current, {
       mode: { name: 'javascript', json: true },
       theme: 'ayu-dark',
       lineNumbers: true,
@@ -36,10 +37,37 @@ const Editor = () => {
 
     });
 
+    editorRef.current.on("change", (instance, changes) => {
+      // console.log(changes)
+      const { origin } = changes;
+      const code = instance.getValue();
+      if (origin !== "setValue") {
+        socketRef.current.emit(Actions.CODE_CHANGE, {
+          roomId,
+          code
+        })
+      }
+
+
+    })
+
+
     return () => {
-      editor.toTextArea();
+      editorRef.current?.toTextArea();
     };
   }, []);
+
+  useEffect(() => {
+    if (socketRef.current) {
+      socketRef.current.on(Actions.CODE_CHANGE, ({ code }) => {
+        if (code !== null) {
+          editorRef.current.setValue(code);
+        }
+
+      })
+    }
+
+  }, [socketRef.current])
 
   return (
     <textarea ref={editorRef}> </textarea>

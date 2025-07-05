@@ -32,19 +32,33 @@ const EditorPage = () => {
         roomId,
         username: Location.state?.username,
       })
+      // Socket event for Joining a room
       socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
-        if (username  !== Location.state?.username){
-          if(socketId !== socketRef.current.id) {
+        if (username !== Location.state?.username) {
+          if (socketId !== socketRef.current.id) {
             toast.success(`${username} has joined`)
           }
         }
         setClients(clients)
+      })
+      // Socket event for disconnected clients
+      socketRef.current.on(Actions.DISCONNECTED, ({ socketId, username }) => {
+        toast.success(`${username} has left the room`)
+        setClients((perv) => {
+          return perv.filter(client => client.socketId !== socketId)
 
-
+        })
 
       })
+
     }
     init()
+    return () => {
+      socketRef.current.disconnect()
+      socketRef.current.off(Actions.JOINED)
+      socketRef.current.off(Actions.DISCONNECTED)
+
+    }
   }, [])
 
   if (!Location.state) {
@@ -72,7 +86,7 @@ const EditorPage = () => {
         <button className='btn leaveBtn'>LEAVE Room</button>
       </div>
       <div className='codeEditor'>
-        <Editor />
+        <Editor socketRef={socketRef} roomId={roomId} />
       </div>
     </div>
 
