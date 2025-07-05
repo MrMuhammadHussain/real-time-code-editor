@@ -37,6 +37,7 @@ const Editor = ({ socketRef, roomId }) => {
 
     });
 
+// Listen for changes in the editor and emit them to the server
     editorRef.current.on("change", (instance, changes) => {
       // console.log(changes)
       const { origin } = changes;
@@ -47,16 +48,15 @@ const Editor = ({ socketRef, roomId }) => {
           code
         })
       }
-
-
     })
-
 
     return () => {
       editorRef.current?.toTextArea();
     };
   }, []);
 
+  // Listen for code changes from the server and update the editor
+  // This effect runs when the socket connection is established
   useEffect(() => {
     if (socketRef.current) {
       socketRef.current.on(Actions.CODE_CHANGE, ({ code }) => {
@@ -69,6 +69,7 @@ const Editor = ({ socketRef, roomId }) => {
 
   }, [socketRef.current])
 
+  
   return (
     <textarea ref={editorRef}> </textarea>
   )

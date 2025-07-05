@@ -32,6 +32,7 @@ const EditorPage = () => {
         roomId,
         username: Location.state?.username,
       })
+      // Socket event for receiving the initial list of clients
       // Socket event for Joining a room
       socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
         if (username !== Location.state?.username) {
@@ -41,7 +42,7 @@ const EditorPage = () => {
         }
         setClients(clients)
       })
-      // Socket event for disconnected clients
+      // Socket event listing for disconnected
       socketRef.current.on(Actions.DISCONNECTED, ({ socketId, username }) => {
         toast.success(`${username} has left the room`)
         setClients((perv) => {
@@ -54,6 +55,7 @@ const EditorPage = () => {
     }
     init()
     return () => {
+      // Cleanup function to disconnect the socket and remove event listeners
       socketRef.current.disconnect()
       socketRef.current.off(Actions.JOINED)
       socketRef.current.off(Actions.DISCONNECTED)
