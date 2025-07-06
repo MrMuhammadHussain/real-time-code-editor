@@ -14,7 +14,7 @@ const EditorPage = () => {
 
 
   const handaleError = (e) => {
-    console.log("❌ Socket connection error:", e);
+    // console.log("❌ Socket connection error:", e);
     toast.error("Socket connection error! Please try again later.")
     reactorNavigat('/')
   }
@@ -37,14 +37,14 @@ const EditorPage = () => {
       socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
         if (username !== Location.state?.username) {
           if (socketId !== socketRef.current.id) {
-            toast.success(`${username} has joined`)
+            toast.success(`${username} has Joined ☺️ `)
           }
         }
         setClients(clients)
       })
       // Socket event listing for disconnected
       socketRef.current.on(Actions.DISCONNECTED, ({ socketId, username }) => {
-        toast.success(`${username} has left the room`)
+        toast.success(`${username} has Left the Room 😇`)
         setClients((perv) => {
           return perv.filter(client => client.socketId !== socketId)
 
@@ -71,6 +71,10 @@ const EditorPage = () => {
       toast.error("Failed to Copy Room ID!'😮‍💨")
     }
   }
+  const leaveRoom = () => {
+    reactorNavigat('/')
+
+  }
 
   if (!Location.state) {
     toast.error("Room ID Not Found! Please create a new room.")
@@ -92,7 +96,7 @@ const EditorPage = () => {
           </div>
         </div>
         <button className='btn copyBtn' onClick={copyRoomId} >Copy Room ID</button>
-        <button className='btn leaveBtn'>LEAVE Room</button>
+        <button className='btn leaveBtn' onClick={leaveRoom}>LEAVE Room</button>
       </div>
       <div className='codeEditor'>
         <Editor socketRef={socketRef} roomId={roomId} />

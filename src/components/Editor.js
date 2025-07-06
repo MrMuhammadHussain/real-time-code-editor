@@ -39,7 +39,6 @@ const Editor = ({ socketRef, roomId }) => {
 
 // Listen for changes in the editor and emit them to the server
     editorRef.current.on("change", (instance, changes) => {
-      // console.log(changes)
       const { origin } = changes;
       const code = instance.getValue();
       if (origin !== "setValue") {
@@ -65,6 +64,9 @@ const Editor = ({ socketRef, roomId }) => {
         }
 
       })
+    }
+    return () => {
+      socketRef.current?.off(Actions.CODE_CHANGE)
     }
 
   }, [socketRef.current])
