@@ -63,6 +63,15 @@ const EditorPage = () => {
     }
   }, [])
 
+  const copyRoomId = () => {
+    try {
+      navigator.clipboard.writeText(roomId)
+      toast.success("Room ID Copied!👍")
+    } catch (error) {
+      toast.error("Failed to Copy Room ID!'😮‍💨")
+    }
+  }
+
   if (!Location.state) {
     toast.error("Room ID Not Found! Please create a new room.")
     return <Navigate to="/" />
@@ -82,9 +91,7 @@ const EditorPage = () => {
             }
           </div>
         </div>
-        <button className='btn copyBtn' onClick={() =>
-          toast.success("Room ID Copied!👍")
-        } >Copy Room ID</button>
+        <button className='btn copyBtn' onClick={copyRoomId} >Copy Room ID</button>
         <button className='btn leaveBtn'>LEAVE Room</button>
       </div>
       <div className='codeEditor'>
