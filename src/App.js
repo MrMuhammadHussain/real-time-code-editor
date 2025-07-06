@@ -14,10 +14,10 @@ function App() {
         theme: {
           primary: "#4aed88",
         },
-        duration: 1500,
+        duration: 1000,
       },
     error:{
-      duration: 1500,
+      duration: 1000,
     }
     }}
     />
