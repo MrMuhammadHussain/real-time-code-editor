@@ -10,6 +10,7 @@ const EditorPage = () => {
   const reactorNavigat = useNavigate()
   const Location = useLocation()
   const socketRef = useRef(null)
+  const codeRef = useRef(null)
   const { roomId } = useParams()
 
 
@@ -35,12 +36,14 @@ const EditorPage = () => {
       // Socket event for receiving the initial list of clients
       // Socket event for Joining a room
       socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
-        if (username !== Location.state?.username) {
           if (socketId !== socketRef.current.id) {
             toast.success(`${username} has Joined ☺️ `)
-          }
         }
         setClients(clients)
+        socketRef.current.emit(Actions.SYNC_CODE, {
+          code: codeRef.current,
+           socketId,
+        })
       })
       // Socket event listing for disconnected
       socketRef.current.on(Actions.DISCONNECTED, ({ socketId, username }) => {
@@ -99,7 +102,9 @@ const EditorPage = () => {
         <button className='btn leaveBtn' onClick={leaveRoom}>LEAVE Room</button>
       </div>
       <div className='codeEditor'>
-        <Editor socketRef={socketRef} roomId={roomId} />
+        <Editor socketRef={socketRef} roomId={roomId} onCodeSync={(code) => {
+          codeRef.current = code
+        }} />
       </div>
     </div>
 

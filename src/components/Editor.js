@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Codemirror from 'codemirror'
 import "codemirror/lib/codemirror.css"
 import "codemirror/theme/ayu-dark.css"
@@ -10,7 +10,7 @@ import "codemirror/addon/hint/show-hint.css";
 import Actions from '../Actions'
 
 
-const Editor = ({ socketRef, roomId }) => {
+const Editor = ({ socketRef, roomId, onCodeSync }) => {
   const editorRef = useRef(null);
 
   useEffect(() => {
@@ -37,10 +37,11 @@ const Editor = ({ socketRef, roomId }) => {
 
     });
 
-// Listen for changes in the editor and emit them to the server
+    // Listen for changes in the editor and emit them to the server
     editorRef.current.on("change", (instance, changes) => {
       const { origin } = changes;
       const code = instance.getValue();
+      onCodeSync(code)
       if (origin !== "setValue") {
         socketRef.current.emit(Actions.CODE_CHANGE, {
           roomId,
@@ -66,12 +67,12 @@ const Editor = ({ socketRef, roomId }) => {
       })
     }
     return () => {
-      socketRef.current?.off(Actions.CODE_CHANGE)
+      socketRef.current.off(Actions.CODE_CHANGE)
     }
 
   }, [socketRef.current])
 
-  
+
   return (
     <textarea ref={editorRef}> </textarea>
   )
