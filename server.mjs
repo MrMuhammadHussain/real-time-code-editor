@@ -1,7 +1,6 @@
 import express from 'express';
 import http from 'http';
 import { Server } from "socket.io"
-import cors from 'cors';
 import Actions from './src/Actions.js';
 
 const app = express()
