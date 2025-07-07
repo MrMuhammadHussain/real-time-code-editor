@@ -12,9 +12,7 @@ const Home = () => {
     e.preventDefault()
     const id = uuid()
     setRoomId(id)
-    toast.success("New Room Created Successfully!🎉")
-
-  };
+    toast.success("New Room Created Successfully!🎉")};
   const joinRoom = () => {
     if (!roomId || !username) {
       toast.error("ID or Name is Missing!😮‍💨")
