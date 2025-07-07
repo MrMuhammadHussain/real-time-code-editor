@@ -13,16 +13,12 @@ const EditorPage = () => {
   const codeRef = useRef(null)
   const { roomId } = useParams()
 
-
   const handaleError = (e) => {
     // console.log("❌ Socket connection error:", e);
     toast.error("Socket connection error! Please try again later.")
     reactorNavigat('/')
   }
   const [clients, setClients] = useState([])
-
-
-
 
   useEffect(() => {
     const init = async () => {
