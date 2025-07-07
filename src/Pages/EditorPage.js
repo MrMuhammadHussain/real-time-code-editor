@@ -58,13 +58,12 @@ const EditorPage = () => {
       socketRef.current.disconnect()
       socketRef.current.off(Actions.JOINED)
       socketRef.current.off(Actions.DISCONNECTED)
-
     }
   }, [])
 
   const copyRoomId = () => {
     try {
-      navigator.clipboard.writeText(roomId)
+     navigator.clipboard.writeText(roomId)
       toast.success("Room ID Copied!👍")
     } catch (error) {
       toast.error("Failed to Copy Room ID!'😮‍💨")
@@ -72,7 +71,6 @@ const EditorPage = () => {
   }
   const leaveRoom = () => {
     reactorNavigat('/')
-
   }
 
   if (!Location.state) {
