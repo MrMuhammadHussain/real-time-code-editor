@@ -32,7 +32,7 @@ const Home = () => {
     }
   }
 
-  return (
+ return (
     <div className='homePageWarpper'>
 
       <div className='formWrapper'>
