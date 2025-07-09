@@ -12,9 +12,7 @@ const Home = () => {
     e.preventDefault()
     const id = uuid()
     setRoomId(id)
-    toast.success("New Room Created Successfully!🎉")
-
-  };
+    toast.success("New Room Created Successfully!🎉")};
   const joinRoom = () => {
     if (!roomId || !username) {
       toast.error("ID or Name is Missing!😮‍💨")
@@ -34,7 +32,7 @@ const Home = () => {
     }
   }
 
-  return (
+ return (
     <div className='homePageWarpper'>
 
       <div className='formWrapper'>
@@ -72,5 +70,4 @@ const Home = () => {
     </div>
   )
 }
-
 export default Home

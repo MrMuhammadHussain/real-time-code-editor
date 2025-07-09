@@ -13,14 +13,12 @@ const EditorPage = () => {
   const codeRef = useRef(null)
   const { roomId } = useParams()
 
-
   const handaleError = (e) => {
     // console.log("❌ Socket connection error:", e);
     toast.error("Socket connection error! Please try again later.")
     reactorNavigat('/')
   }
   const [clients, setClients] = useState([])
-  const [typingUser, setTypingUser] = useState(null)
 
 
 
@@ -72,14 +70,13 @@ const EditorPage = () => {
       socketRef.current.disconnect()
       socketRef.current.off(Actions.JOINED)
       socketRef.current.off(Actions.DISCONNECTED)
-      socketRef.current.off(Actions.TYPING)
 
     }
   }, [])
 
   const copyRoomId = () => {
     try {
-      navigator.clipboard.writeText(roomId)
+     navigator.clipboard.writeText(roomId)
       toast.success("Room ID Copied!👍")
     } catch (error) {
       toast.error("Failed to Copy Room ID!'😮‍💨")
@@ -87,7 +84,6 @@ const EditorPage = () => {
   }
   const leaveRoom = () => {
     reactorNavigat('/')
-
   }
 
   if (!Location.state) {
