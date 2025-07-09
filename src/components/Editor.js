@@ -10,7 +10,7 @@ import "codemirror/addon/hint/show-hint.css";
 import Actions from '../Actions'
 
 
-const Editor = ({ socketRef, roomId, onCodeSync }) => {
+const Editor = ({ socketRef, roomId, onCodeSync, username, runCode }) => {
   const editorRef = useRef(null);
 
   useEffect(() => {
@@ -32,7 +32,16 @@ const Editor = ({ socketRef, roomId, onCodeSync }) => {
               };
             },
           });
-        }
+        },
+
+        "Shift-Enter": () => {
+          if (typeof runCode === "function") {
+            runCode()
+          }
+
+        },
+        
+
       }
 
     });
@@ -42,11 +51,19 @@ const Editor = ({ socketRef, roomId, onCodeSync }) => {
       const { origin } = changes;
       const code = instance.getValue();
       onCodeSync(code)
+
       if (origin !== "setValue") {
         socketRef.current.emit(Actions.CODE_CHANGE, {
           roomId,
           code
         })
+
+        socketRef.current.emit(Actions.TYPING, {
+          roomId,
+          username,
+        })
+
+        
       }
     })
 
@@ -63,7 +80,6 @@ const Editor = ({ socketRef, roomId, onCodeSync }) => {
         if (code !== null) {
           editorRef.current.setValue(code);
         }
-
       })
     }
     return () => {
@@ -74,7 +90,10 @@ const Editor = ({ socketRef, roomId, onCodeSync }) => {
 
 
   return (
-    <textarea ref={editorRef}> </textarea>
+    <>
+      <textarea ref={editorRef}></textarea>
+      
+    </>
   )
 }
 

@@ -20,6 +20,7 @@ const EditorPage = () => {
     reactorNavigat('/')
   }
   const [clients, setClients] = useState([])
+  const [typingUser, setTypingUser] = useState(null)
 
 
 
@@ -36,23 +37,32 @@ const EditorPage = () => {
       // Socket event for receiving the initial list of clients
       // Socket event for Joining a room
       socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
-          if (socketId !== socketRef.current.id) {
-            toast.success(`${username} has Joined ☺️ `)
+        if (socketId !== socketRef.current.id) {
+          toast.success(`${username} has Joined ☺️ `)
         }
         setClients(clients)
         socketRef.current.emit(Actions.SYNC_CODE, {
           code: codeRef.current,
-           socketId,
+          socketId,
         })
       })
+
+      socketRef.current.on(Actions.TYPING, ({ username }) => {
+        if (username !== Location.state?.username) {
+          setTypingUser(username)
+          setTimeout(() => {
+            setTypingUser(null)
+          }, 2000)
+        }
+      })
+
+
       // Socket event listing for disconnected
       socketRef.current.on(Actions.DISCONNECTED, ({ socketId, username }) => {
         toast.success(`${username} has Left the Room 😇`)
         setClients((perv) => {
           return perv.filter(client => client.socketId !== socketId)
-
         })
-
       })
 
     }
@@ -62,6 +72,7 @@ const EditorPage = () => {
       socketRef.current.disconnect()
       socketRef.current.off(Actions.JOINED)
       socketRef.current.off(Actions.DISCONNECTED)
+      socketRef.current.off(Actions.TYPING)
 
     }
   }, [])
@@ -85,17 +96,30 @@ const EditorPage = () => {
   }
   const runCode = () => {
     try {
-      if (codeRef.current){
-      const result = eval(codeRef.current)
-      document.querySelector(".outputArea").textContent = result;
-      toast.success("Code Executed Successfully! 🎉")
+      if (codeRef.current) {
+        document.querySelector(".outputArea").textContent = "";
+
+        const logs = [];
+        const originalLog = console.log;
+        console.log = (...args) => {
+          logs.push(args.join(" "));
+        };
+        const result = eval(codeRef.current)
+
+        if (logs.length > 0) {
+          document.querySelector(".outputArea").textContent = logs.join("\n");
+        } else if (result !== undefined) {
+          document.querySelector(".outputArea").textContent = result;
+        } else {
+          document.querySelector(".outputArea").textContent = "Code executed successfully!";
+        }
+        toast.success("Code Executed Successfully! 🎉");
+
       }
     } catch (error) {
       document.querySelector(".outputArea").textContent = error.message;
       toast.error("Error in Code Execution! Please check your code.😢")
-      console.error("Error executing code:", error);
 
-      
     }
   }
 
@@ -106,23 +130,26 @@ const EditorPage = () => {
           <div className='logo'>
             <img className='logoImage' src='/code-sync.png' alt='logo' />
           </div>
-          <h4>{clients.length} User{clients.length !== 1 ? 's' : ''} Connected</h4>
+          <h5>{clients.length} User{clients.length !== 1 ? 's' : ''} Connected</h5>
+          {typingUser && (<span className='typingBox'>{typingUser} is typing</span>)}
+
+
           <div className='clientsList'>
             {
               clients.map((client) => (<Client username={client.username} key={client.socketId} />))
             }
+
           </div>
         </div>
+
         <button className='btn copyBtn' onClick={copyRoomId} >Copy Room ID</button>
         <button className='btn leaveBtn' onClick={leaveRoom}>LEAVE Room</button>
       </div>
       <div className='codeEditor'>
-        <Editor socketRef={socketRef} roomId={roomId} onCodeSync={(code) => {
-          codeRef.current = code
-        }} />
-        <button className='btn runBtn' onClick={runCode}>▶️ Run Code </button>
+        <Editor socketRef={socketRef} roomId={roomId} username={Location.state?.username} runCode={runCode} onCodeSync={(code) => { codeRef.current = code }} />
         <div className='codeOutput'>
-          <h3>Output </h3>
+          <button className='btn runBtn' onClick={runCode}>🚀 Run Code </button>
+          <h6>Output</h6>
           <pre className='outputArea'></pre>
 
         </div>

@@ -92,7 +92,8 @@ footer {
 .mainWrapper {
   display: grid;
   grid-template-columns: 230px 1fr;
-  /* height: 100vh; */
+  height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
@@ -127,7 +128,7 @@ footer {
   color: #fff;
 }
 
-.userName {
+.username {
   margin-top: 6px;
 }
 
@@ -144,7 +145,6 @@ footer {
   background: #4aee88;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
-
 }
 
 .leaveBtn {
@@ -153,37 +153,47 @@ footer {
   margin-top: 10px;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
-
 }
-.copyBtn:hover {
+
+.copyBtn:hover , .runBtn:hover {
   background: #2b824c;
 }
+
 .leaveBtn:hover {
   background: #8b0c0c;
 }
+
 .CodeMirror {
-    min-height: calc(100vh - 50px);
-    font-size: 20px;
-    line-height: 1.7;
-    padding-top: 18px;
+  min-height: calc(68vh - 20px);
+  font-size: 18px;
+  line-height: 1.2;
+  padding-top: 8px;
+  border-radius: 10px;
 }
-
-
-
-
-
 
 .runBtn {
-  background: #2a9d8f;
-  margin-top: 10px;
+  background: #0ee919;
+  margin-top: 5px;
   border-radius: 10px;
-  color: white;
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
 }
-.outputBox {
+
+.codeOutput {
   background: #1e1e1e;
   padding: 10px;
   margin-top: 10px;
-  border-radius: 8px;
+  border-radius: 10px;
   color: #4aee88;
   font-size: 16px;
+  max-height: calc(25vh);
+  overflow: auto;
+}
+
+.typingBox {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: #ffa500;
+  font-style: italic;
 }

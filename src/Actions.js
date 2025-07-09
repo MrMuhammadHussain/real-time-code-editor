@@ -5,6 +5,7 @@ const Actions = {
     CODE_CHANGE: "code-change",
     SYNC_CODE: "sync-code",
     LEAVE: "leave",
+    TYPING: "typing",
 
 }
 module.exports = Actions;
