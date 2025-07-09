@@ -19,6 +19,7 @@ const EditorPage = () => {
     reactorNavigat('/')
   }
   const [clients, setClients] = useState([])
+  const [typingUser, setTypingUser] = useState(null)
 
 
 
@@ -70,6 +71,7 @@ const EditorPage = () => {
       socketRef.current.disconnect()
       socketRef.current.off(Actions.JOINED)
       socketRef.current.off(Actions.DISCONNECTED)
+      socketRef.current.off(Actions.TYPING)
 
     }
   }, [])
