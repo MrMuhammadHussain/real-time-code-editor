@@ -55,6 +55,11 @@ const EditorPage = () => {
         }
       })
 
+      socketRef.current.on(Actions.CODE_OUTPUT,({output})=>{
+        document.querySelector(".outputArea").textContent = output
+
+      })
+
 
       // Socket event listing for disconnected
       socketRef.current.on(Actions.DISCONNECTED, ({ socketId, username }) => {
@@ -72,13 +77,14 @@ const EditorPage = () => {
       socketRef.current.off(Actions.JOINED)
       socketRef.current.off(Actions.DISCONNECTED)
       socketRef.current.off(Actions.TYPING)
+      socketRef.current.off(Actions.CODE_OUTPUT)
 
     }
   }, [])
 
   const copyRoomId = () => {
     try {
-     navigator.clipboard.writeText(roomId)
+      navigator.clipboard.writeText(roomId)
       toast.success("Room ID Copied!👍")
     } catch (error) {
       toast.error("Failed to Copy Room ID!'😮‍💨")
@@ -104,18 +110,32 @@ const EditorPage = () => {
         };
         const result = eval(codeRef.current)
 
+        let codeOutput = ""
+
         if (logs.length > 0) {
-          document.querySelector(".outputArea").textContent = logs.join("\n");
+          codeOutput = logs.join("\n");
         } else if (result !== undefined) {
-          document.querySelector(".outputArea").textContent = result;
+          codeOutput = result.toString()
         } else {
-          document.querySelector(".outputArea").textContent = "Code executed successfully!";
+          codeOutput = "Code executed successfully!"
         }
+        document.querySelector(".outputArea").textContent = codeOutput
+
+        socketRef.current.emit(Actions.CODE_OUTPUT, {
+          roomId,
+          output: codeOutput,
+        })
         toast.success("Code Executed Successfully! 🎉");
 
       }
     } catch (error) {
       document.querySelector(".outputArea").textContent = error.message;
+
+      socketRef.current.emit(Actions.CODE_OUTPUT,{
+        roomId,
+        output : error.message
+      })
+
       toast.error("Error in Code Execution! Please check your code.😢")
 
     }

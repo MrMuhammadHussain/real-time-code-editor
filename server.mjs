@@ -51,6 +51,10 @@ io.on("connection", (socket) => {
     socket.in(roomId).emit(Actions.TYPING, { username })
   })
 
+  socket.on(Actions.CODE_OUTPUT, ({ output, roomId }) => {
+    io.to(roomId).emit(Actions.CODE_OUTPUT, { output })
+  })
+
 
 
   socket.on("disconnecting", () => {
