@@ -36,13 +36,13 @@ const EditorPage = () => {
       // Socket event for receiving the initial list of clients
       // Socket event for Joining a room
       socketRef.current.on(Actions.JOINED, ({ clients, username, socketId }) => {
-          if (socketId !== socketRef.current.id) {
-            toast.success(`${username} has Joined ☺️ `)
+        if (socketId !== socketRef.current.id) {
+          toast.success(`${username} has Joined ☺️ `)
         }
         setClients(clients)
         socketRef.current.emit(Actions.SYNC_CODE, {
           code: codeRef.current,
-           socketId,
+          socketId,
         })
       })
       // Socket event listing for disconnected
@@ -83,6 +83,21 @@ const EditorPage = () => {
     toast.error("Room ID Not Found! Please create a new room.")
     return <Navigate to="/" />
   }
+  const runCode = () => {
+    try {
+      if (codeRef.current) {
+        const result = eval(codeRef.current)
+        document.querySelector(".outputArea").textContent = result;
+        toast.success("Code Executed Successfully! 🎉")
+      }
+    } catch (error) {
+      document.querySelector(".outputArea").textContent = error.message;
+      toast.error("Error in Code Execution! Please check your code.😢")
+      console.error("Error executing code:", error);
+
+
+    }
+  }
 
   return (
     <div className='mainWrapper'>
@@ -91,7 +106,7 @@ const EditorPage = () => {
           <div className='logo'>
             <img className='logoImage' src='/code-sync.png' alt='logo' />
           </div>
-          <h3>Connected</h3>
+          <h4>Connected: {clients.length} User{clients.length !== 1 ? 's' : ''}</h4>
           <div className='clientsList'>
             {
               clients.map((client) => (<Client username={client.username} key={client.socketId} />))
@@ -105,6 +120,12 @@ const EditorPage = () => {
         <Editor socketRef={socketRef} roomId={roomId} onCodeSync={(code) => {
           codeRef.current = code
         }} />
+        <button className='btn runBtn' onClick={runCode}>▶️ Run Code </button>
+        <div className='codeOutput'>
+          <h3>Output </h3>
+          <pre className='outputArea'></pre>
+
+        </div>
       </div>
     </div>
 
