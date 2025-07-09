@@ -2,9 +2,20 @@ import express from 'express';
 import http from 'http';
 import { Server } from "socket.io"
 import Actions from './src/Actions.js';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
 
 const app = express()
 app.use(express.json())
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+app.use(express.static("build"))
+app.use((req, res, next) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 
 const port = process.env.PORT || 5080
 const server = http.createServer(app)
@@ -16,10 +27,8 @@ const getAllClints = (roomId) => {
     return {
       socketId,
       username: usersList[socketId]
-    }
-  }
-  )
-}
+    }}
+  )}
 
 io.on("connection", (socket) => {
   // console.log("✅ client connected", socket.id);
@@ -34,7 +43,6 @@ io.on("connection", (socket) => {
         clients,
         username,
         socketId: socket.id
-
       })
     })
   })
@@ -55,8 +63,6 @@ io.on("connection", (socket) => {
     io.to(roomId).emit(Actions.CODE_OUTPUT, { output })
   })
 
-
-
   socket.on("disconnecting", () => {
     const rooms = [...socket.rooms];
     rooms.forEach((roomId) => {
@@ -68,9 +74,7 @@ io.on("connection", (socket) => {
     delete usersList[socket.id]
     socket.leave()
   })
-
 })
-
 
 server.listen(port, () => {
   console.log(`🚀 Server is running on port ${port}`);

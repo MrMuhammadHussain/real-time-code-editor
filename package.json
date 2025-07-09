@@ -22,9 +22,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "server:dev": " nodemon server.mjs",
-    "server:prod": " node server.mjs",
+    "start:fornt": "react-scripts start",
+    "start": "yarn build && yarn server:prod ",
+    "server:dev": " nodemon server.js",
+    "server:prod": " node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
