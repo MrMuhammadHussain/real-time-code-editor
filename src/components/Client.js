@@ -1,12 +1,9 @@
-import Avatar from 'react-avatar';
-
 const Client = ({username}) => {
   return (
-    <div className='client'>
-        <Avatar name={username} size={50} round="16px"/>
-        <span className='userName'>{username}</span>
 
-    </div>
+    <div className="avatat">{username[0].toUpperCase()}
+        <span className='username'>{username}</span>
+</div>
   )
 }
 
