@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start:fornt": "react-scripts start",
-    "start": "yarn build && yarn server:prod ",
+    "start": "npm run build && npm run server:prod ",
     "server:dev": " nodemon server.js",
     "server:prod": " node server.js",
     "build": "react-scripts build",
