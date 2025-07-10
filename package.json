@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "build": "react-scripts build",
+    "build": "CI='' react-scripts build",
     "fornt": "react-scripts start",
     "server:dev": " nodemon server.mjs",
     "server:prod": " node server.mjs",

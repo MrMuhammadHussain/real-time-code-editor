@@ -80,7 +80,7 @@ const EditorPage = () => {
       socketRef.current.off(Actions.CODE_OUTPUT)
 
     }
-  }, [])
+  }, [])//[Location.state?.username, roomId]
 
   const copyRoomId = () => {
     try {
