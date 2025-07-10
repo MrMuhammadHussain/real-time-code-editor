@@ -4,10 +4,12 @@ import { Server } from "socket.io"
 import Actions from './src/Actions.js';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import cors from "cors"
 
 
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,7 +21,12 @@ app.use((req, res, next) => {
 
 const port = process.env.PORT || 5080
 const server = http.createServer(app)
-const io = new Server(server)
+const io = new Server(server,{
+  cors: {
+    origin: '*',
+    methods: ['GET', 'POST']
+  }
+})
 const usersList = {}
 
 const getAllClints = (roomId) => {
