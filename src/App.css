@@ -115,17 +115,15 @@ footer {
   gap: 10px;
 }
 
-.avatat {
+.client {
   display: flex;
   align-items: center;
   flex-direction: column;
   font-weight: bold;
-  background: #4aee88;
+  /* background: #4aee88;
   color: #1c1e29;
   padding: 2px;
-  border-radius: 8px;
-
-  
+  border-radius: 8px; */
 }
 
 

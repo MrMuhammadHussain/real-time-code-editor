@@ -1,10 +1,12 @@
-const Client = ({username}) => {
-  return (
+import Avvvatars from "avvvatars-react";
 
-    <div className="avatat">{username[0].toUpperCase()}
-        <span className='username'>{username}</span>
-</div>
-  )
-}
+const Client = ({ username }) => {
+    return (
+        <div className="client">
+            <Avvvatars name={username} size={50} round="14px" />
+            <span className="userName">{username}</span>
+        </div>
+    );
+};
 
-export default Client
+export default Client;
