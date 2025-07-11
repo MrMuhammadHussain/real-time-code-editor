@@ -32,7 +32,6 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 * Express
 * Socket.IO
 * Railway (for deployment)
-* Vite or Create React App (choose based on your setup)
 
 ---
 
@@ -40,8 +39,9 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 
 ```bash
 🔺️ real-time-code-editor/   # React frontend
+│   └── public/...
 │   └── src/...
-🔺️ server                   # Express backend
+🔺️ server.mjs               # Express backend
 🔺️ package.json
 🔺️ README.md
 ```
@@ -71,7 +71,7 @@ yarn
 
 ### 3. Set Environment Variable
 
-Create a `.env` file:
+Create a `.env` file at root Folder:
 
 ```env
 REACT_APP_BACKEND_URL="http://localhost:5080/"
