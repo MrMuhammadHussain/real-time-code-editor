@@ -8,7 +8,7 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 
 * 🧑‍🥝 Real-time collaboration
 * ✨ See who is typing
-* 🧠 AI-based code suggestion (free, no API key needed)
+* 🧠 AI-based code suggestion (free, no API key needed)//temporary Disable
 * 📄 Instant code sync
 * 💻 Terminal-style code output
 * 👥 Show connected users
