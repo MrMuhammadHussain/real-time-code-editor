@@ -8,7 +8,7 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 
 * 🧑‍🥝 Real-time collaboration
 * ✨ See who is typing
-* 🧠 AI-based code suggestion (free, no API key needed)//temporary Disable
+* 🧠 AI-based code suggestion (free, no API key needed)//Temporary Disable or under Development
 * 📄 Instant code sync
 * 💻 Terminal-style code output
 * 👥 Show connected users
@@ -106,7 +106,7 @@ npm run server:dev
 
 ## 🙌 Credits
 
-This project was made by **\[Me]** based on a tutorial, with additional features added manually (AI suggestions, typing status, code output, how many users are connected, Code hints, etc.).
+This project was made by **\[Me]** based on a tutorial, with additional features added manually (AI suggestions, typing status, code output, how many users are connected, code hints, etc.).
 
 ---
 
