@@ -19,7 +19,8 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 
 ## 🖼️ Preview
 
-![App Preview](https://your-screenshot-url.com) <!-- Replace with actual image if available -->
+![App Preview](./public/AppPreview_1.png)
+![App Preview](./public/AppPreview_2.png)
 
 ---
 
@@ -38,9 +39,9 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 ## 📁 Project Structure
 
 ```bash
-🔺️ real-time-code-editor/              # React frontend
+🔺️ real-time-code-editor/   # React frontend
 │   └── src/...
-🔺️ server               # Express backend
+🔺️ server                   # Express backend
 🔺️ package.json
 🔺️ README.md
 ```
