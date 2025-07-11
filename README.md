@@ -106,7 +106,7 @@ npm run server:dev
 
 ## 🙌 Credits
 
-This project was made by **\Me** based on a YouTube tutorial, with additional features added manually (AI suggestions, typing status, code output, how many users are connected, Code hints, etc.).
+This project was made by **\[Me]** based on a tutorial, with additional features added manually (AI suggestions, typing status, code output, how many users are connected, Code hints, etc.).
 
 ---
 
