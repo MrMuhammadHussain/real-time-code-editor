@@ -14,9 +14,10 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 * 👥 Show connected users
 * 🗌 Copy Room ID & share with others
 * ⚡ Smooth UI with CodeMirror
-* 👨‍💻 instant Code output for all users real-time
+* 👨‍💻 Instant code output for all users real-time
 * ⌨️ Press Control+Space together to get Hints
 * ⌨️ Press Shift+Enter together to Run Code
+* 👥 All connected users notified when someone Join or Leave the Room
 
 ---
 
@@ -70,6 +71,7 @@ Or if using Yarn:
 
 ```bash
 yarn
+yarn add
 ```
 
 ### 3. Set Environment Variable
