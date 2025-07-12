@@ -31,7 +31,7 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 * Node.js
 * Express
 * Socket.IO
-* Railway (for deployment)
+* Railway and Vercel (for deployment)
 
 ---
 
