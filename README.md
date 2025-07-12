@@ -106,6 +106,8 @@ npm run server:dev
 
 * `eval()` is used to run code (JavaScript only). Avoid running unsafe code.
 * React 19+ may conflict with some libraries like `react-avatar`. Use alternatives like `avvvatars-react`.
+* 🖥️ It's comprtable with desktop
+* 📱 to use in mobile rotat the phone or desktopsite version 
 
 ---
 
