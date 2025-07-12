@@ -14,6 +14,7 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 * 👥 Show connected users
 * 🗌 Copy Room ID & share with others
 * ⚡ Smooth UI with CodeMirror
+* 👨‍💻 instant Code output for all users real-time
 
 ---
 
