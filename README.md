@@ -15,8 +15,8 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 * 🗌 Copy Room ID & share with others
 * ⚡ Smooth UI with CodeMirror
 * 👨‍💻 Instant code output for all users real-time
-* ⌨️ Press Control+Space together to get Hints
-* ⌨️ Press Shift+Enter together to Run Code
+* ⌨️ Press "Ctrl+Space" together to get hints
+* ⌨️ Press "Shift+Enter" together to Run Code
 * 👥 All connected users notified when someone Join or Leave the Room
 
 ---
