@@ -14,7 +14,7 @@ function App() {
         theme: {
           primary: "#4aed88",
         },
-        duration: 1000,
+        duration: 1200,
       },
     error:{
       duration: 1000,
