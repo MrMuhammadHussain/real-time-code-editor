@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 import Actions from '../Actions';
 
 const EditorPage = () => {
-  const reactorNavigat = useNavigate()
+  const reactNavigator = useNavigate()
   const Location = useLocation()
   const socketRef = useRef(null)
   const codeRef = useRef(null)
@@ -16,7 +16,7 @@ const EditorPage = () => {
   const handaleError = (e) => {
     // console.log("❌ Socket connection error:", e);
     toast.error("Socket connection error! Please try again later.")
-    reactorNavigat('/')
+    reactNavigator('/')
   }
   const [clients, setClients] = useState([])
   const [typingUser, setTypingUser] = useState(null)
