@@ -17,7 +17,7 @@ function App() {
         duration: 1200,
       },
     error:{
-      duration: 1000,
+      duration: 1200,
     }
     }}
     />
