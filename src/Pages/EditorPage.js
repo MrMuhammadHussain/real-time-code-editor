@@ -21,9 +21,6 @@ const EditorPage = () => {
   const [clients, setClients] = useState([])
   const [typingUser, setTypingUser] = useState(null)
 
-
-
-
   useEffect(() => {
     const init = async () => {
       socketRef.current = await initSoket()
