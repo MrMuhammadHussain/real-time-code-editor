@@ -91,7 +91,7 @@ const EditorPage = () => {
     }
   }
   const leaveRoom = () => {
-    reactorNavigat('/')
+    reactNavigator('/')
   }
 
   if (!Location.state) {
