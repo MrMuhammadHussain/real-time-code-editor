@@ -109,7 +109,6 @@ npm run server:dev
 * 🖥️ It's compatible with desktop
 * 📱 to use in mobile rotate the phone or use desktop site version
 
-
 ---
 
 ## 🙌 Credits
