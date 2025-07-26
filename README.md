@@ -1,5 +1,5 @@
 # 🧑‍💻 Real-Time Collaborative JavaScripts Code Editor
----
+------
 
 A real-time collaborative code editor built with **React**, **Socket.IO**, **Node.js**, and **Express**. Users can write and run JavaScript code together, see who is typing, get code output in real-time, and even receive AI code suggestions.
 
