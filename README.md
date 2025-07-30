@@ -41,13 +41,39 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 
 ## 📁 Project Structure
 
-```bash
-🔺️ real-time-code-editor/   # React frontend
-│   └── public/...
-│   └── src/...
-🔺️ server.mjs               # Express backend
-🔺️ package.json
-🔺️ README.md
+```
+├── .gitignore
+├── README.md
+├── package-lock.json
+├── package.json
+├── public
+    ├── AppPreview_1.png
+    ├── AppPreview_2.png
+    ├── code-sync.png
+    ├── favicon.ico
+    ├── index.html
+    ├── logo192.png
+    ├── logo512.png
+    ├── manifest.json
+    └── robots.txt
+├── server.mjs
+└── src
+    ├── Actions.js
+    ├── App.css
+    ├── App.js
+    ├── App.test.js
+    ├── Pages
+        ├── EditorPage.js
+        └── Home.js
+    ├── components
+        ├── Client.js
+        └── Editor.js
+    ├── index.css
+    ├── index.js
+    ├── logo.svg
+    ├── reportWebVitals.js
+    ├── setupTests.js
+    └── socket.js
 ```
 
 ---
