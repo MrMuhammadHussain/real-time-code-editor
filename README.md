@@ -97,7 +97,6 @@ Or if using Yarn:
 
 ```bash
 yarn
-yarn add
 ```
 
 ### 3. Set Environment Variable
