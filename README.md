@@ -83,7 +83,7 @@ A real-time collaborative code editor built with **React**, **Socket.IO**, **Nod
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/real-time-code-editor.git
+git clone https://github.com/MrMuhammadHussain/real-time-code-editor.git
 cd real-time-code-editor
 ```
 
