@@ -119,7 +119,6 @@ npm run fornt
 
 npm run server:dev
 ```
-
 ---
 
 ## 🌍 Live App
