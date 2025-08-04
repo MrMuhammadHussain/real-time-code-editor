@@ -146,3 +146,4 @@ This project was made by **Me** based on a tutorial, with additional features ad
 This project is open-source and available under the MIT License
 
 ---
+
